@@ -18,6 +18,7 @@
     - Torre  : for        → 5 casas para a Direita
     - Bispo  : while      → 5 casas na diagonal para Cima Direita
     - Rainha : do-while   → 8 casas para a Esquerda
+    - Cavalo: for + while (aninhados) → 2 Baixo + 1 Esquerda
 */
 
 int main()
@@ -26,6 +27,10 @@ int main()
     const int passosTorre   = 5; // Direita
     const int passosBispo   = 5; // Cima Direita
     const int passosRainha  = 8; // Esquerda
+
+    /* Cavalo (movimento em L): 2 para baixo + 1 para esquerda */
+    const int cavaloParaBaixo       = 2;
+    const int cavaloParaEsquerda    = 1;
 
     /* Mensagens padronizadas (strings) */
     const char *DIR        = "Direita";
@@ -69,6 +74,29 @@ int main()
     printf("%s\n", ESQ);
     contadorRainha++;
   } while (contadorRainha < passosRainha);
+
+  /* === CAVALO (for + while, aninhado) === */
+  /*
+  Lógica: o Cavalo move em "L": 2 casas numa direção + 1 perpendicular.
+  Neste desafio: 2 para baixo e 1 para esquerda;
+  Requisito: usar loops aninhados, sendo um deles obrigatoriamente um 'for'.
+  Implementação:
+    - loop 'for' percorre os dois segmentos do "L" (segmento 0 = vertical; segmento 1 = horizontal)
+    - Para cada segmento, um loop 'while'interno imprime cada casa daquele segmento.
+  */
+ printf("=== Cavalo: 2 casas para Baixo e 1 casa para a Esquerda (movimento em L) ===\n");
+
+ for (int segmento = 0; segmento < 2; segmento++) {
+    /* escolhe a quantidade de passos e direção de segmento atual */
+    const int passosSegmento    = (segmento == 0) ? cavaloParaBaixo : cavaloParaEsquerda;
+    const char *direcao         = (segmento == 0) ? BAIXO : ESQ;
+
+    int realizados = 0;
+    while (realizados < passosSegmento) {
+        printf("%s\n", direcao);
+        realizados++;
+    }
+ }
 
   return 0;
 }
